@@ -39,5 +39,8 @@ public class LineType {
     public LineTypeEnum getType(){
         return type;
     }
+    public String getTypeAsString(){  //TODO
+        return type.toString();
+    }
 }
 

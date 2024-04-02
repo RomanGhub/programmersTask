@@ -1,5 +1,7 @@
 package org.test;
 
+import java.util.Objects;
+
 public class Line {
 
     private LineType lineType;
@@ -7,13 +9,26 @@ public class Line {
     private Question question;
     private ResponseType responseType;
     private Date date;
+    private Integer timeInMinutes;
 
-    public Line(LineType lineType, Service service, Question question, ResponseType responseType, Date date) {
+    public Line(LineType lineType, Service service, Question question, ResponseType responseType, Date date, String time) {
         this.lineType = lineType;
         this.service = service;
         this.question = question;
         this.responseType = responseType;
         this.date = date;
+
+//        this.timeInMinutes =  Integer.valueOf(time);  //TODO
+       if(time != null) this.timeInMinutes =  Integer.valueOf(time);
+    }
+
+    public Boolean compare(Line query){
+        if(service.getServiceId().equals(query.service.getServiceId())){
+
+            return true;
+        }
+
+        return false;
     }
 
     public LineType getLineType() {
@@ -56,6 +71,14 @@ public class Line {
         this.date = date;
     }
 
+    public Integer getTimeInMinutes() {
+        return timeInMinutes;
+    }
+
+    public void setTimeInMinutes(Integer timeInMinutes) {
+        this.timeInMinutes = timeInMinutes;
+    }
+
     @Override
     public String toString() {
         return "Line{" +
@@ -65,5 +88,22 @@ public class Line {
                 ", responseType=" + responseType +
                 ", date=" + date +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Line line = (Line) o;
+        return Objects.equals(lineType, line.lineType) && Objects.equals(service, line.service) && Objects.equals(question, line.question) && Objects.equals(responseType, line.responseType) && Objects.equals(date, line.date) && Objects.equals(timeInMinutes, line.timeInMinutes);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(lineType, service, question, responseType, date, timeInMinutes);
+    }
+
+    public boolean isValid(Line line){
+        return this.service.isValid(line) && this.question.isValid(line);
     }
 }

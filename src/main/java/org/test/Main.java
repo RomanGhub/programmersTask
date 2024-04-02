@@ -19,5 +19,9 @@ public class Main {
             System.out.println(line);
         }
 
+        Analyzer analyzer = new Analyzer();
+
+        System.out.println(analyzer.analyzeLines(lines).toString());
+
     }
 }

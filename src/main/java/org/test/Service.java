@@ -1,9 +1,12 @@
 package org.test;
 
+import java.util.Objects;
+
 public class Service {
 
     private Integer serviceId;
     private Integer variationId;
+    private String asterisk;
 
     public Service(Integer serviceId, Integer variationId) {
         this.serviceId = serviceId;
@@ -17,17 +20,36 @@ public class Service {
     public void setIdsFromString(String serviceString) throws Exception {
         String[] segments = serviceString.split("\\.");
 
+//        System.out.println("service segment: " + segments[0]);
+
         if (segments.length > 2 || segments.length == 0) {
             throw new Exception("Invalid service id's number: " + segments.length);
         } else if(segments.length == 1){
-            setServiceId(Integer.parseInt(segments[0]));
+            if(segments[0].equals("*")){
+                asterisk = segments[0];
+            } else {
+                setServiceId(Integer.parseInt(segments[0]));
+            }
         } else {
             setServiceId(Integer.parseInt(segments[0]));
             setVariationId(Integer.parseInt(segments[1]));
         }
     }
 
+    public boolean isValid(Line line){
+        if (serviceId != null && variationId != null){
+            return serviceId.equals(line.getService().getServiceId()) && variationId.equals(line.getService().getVariationId());
+        } else if(serviceId != null) {
+            return serviceId.equals(line.getService().getServiceId());
+        } else {
+            return asterisk.equals("*");
+        }
+    }
+
     public Integer getServiceId() {
+        if(asterisk != null){
+            return 0;
+        }
         return serviceId;
     }
 
@@ -35,7 +57,7 @@ public class Service {
         this.serviceId = serviceId;
     }
 
-    public Object getVariationId() {
+    public Integer getVariationId() {
         return variationId;
     }
 
