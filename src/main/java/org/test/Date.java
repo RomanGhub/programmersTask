@@ -11,6 +11,7 @@ public class Date {
 
     private LocalDate fromDate;
     private LocalDate toDate;
+    //TODO change to upperCase
     private static final String pattern = "dd.MM.yyyy";
 
 

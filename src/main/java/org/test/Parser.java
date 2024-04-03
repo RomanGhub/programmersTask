@@ -49,7 +49,7 @@ public class Parser {
                 String responseType = matcher.group(4);
                 String date = matcher.group(5);
                 String time = matcher.group(6);
-
+                //TODO do smth with exceptions
                 Line line = new Line( new LineType(queryOrWaiting), new Service(serviceId), new Question(questionTypeId),
                         new ResponseType(responseType), new Date(date), time);
 

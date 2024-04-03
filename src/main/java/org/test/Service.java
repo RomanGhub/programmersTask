@@ -29,6 +29,7 @@ public class Service {
         }
     }
 
+    //TODO simplify this (not necessary)
     public boolean isValid(Line line){
         if (serviceId != null && variationId != null){
             return serviceId.equals(line.getService().getServiceId()) && variationId.equals(line.getService().getVariationId());

@@ -9,9 +9,9 @@ import java.util.stream.Collectors;
 public class Analyzer {
 
 
-    public List<Integer> analyzeLines(List<Line> lines) {
-
-        List<Integer> results = new ArrayList<>();
+    public List<Double> analyzeLines(List<Line> lines) {
+        //TODO make it Double
+        List<Double> results = new ArrayList<>();
 
         List<Line> linesForAnalyzing = new ArrayList<>();
 
@@ -19,8 +19,12 @@ public class Analyzer {
             if (Objects.equals(line.getLineType().getTypeAsString(), "C")) {
                 linesForAnalyzing.add(line);
             } else if (Objects.equals(line.getLineType().getTypeAsString(), "D")) {
-                results.add(((Double) linesForAnalyzing.stream().filter(waitingLine -> isValidForAnalyzing(line, waitingLine)).
-                        collect(Collectors.summarizingInt(Line::getTimeInMinutes)).getAverage()).intValue());
+                results.add((
+                    linesForAnalyzing.stream()
+                    .filter(waitingLine -> isValidForAnalyzing(line, waitingLine))
+                        .map(Line::getTimeInMinutes)
+                        .mapToInt(Integer::intValue)
+                        .average().orElse(0.0)));
             } else {
                 throw new RuntimeException("Nor query nor waiting line");
             }

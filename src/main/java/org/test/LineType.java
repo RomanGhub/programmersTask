@@ -25,7 +25,9 @@ public class LineType {
         type = LineTypeEnum.valueOf(typeString);
     }
 
+    //TODO process exception here, make method private
     public void setTypeFromString(String lineString) throws Exception {
+        //TODO remove redundant cast to arr and process it
         String[] typeSegment = lineString.split("\\.");
 
         if (typeSegment.length != 1) {
