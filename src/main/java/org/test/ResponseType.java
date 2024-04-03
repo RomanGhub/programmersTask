@@ -5,8 +5,6 @@ public class ResponseType {
     private ResponseTypeEnum type;
 
     private enum ResponseTypeEnum{
-//        FIRST("P"),
-//        NEXT("N");
         P("FIRST"),
         N("NEXT");
 
@@ -15,17 +13,8 @@ public class ResponseType {
         ResponseTypeEnum(final String typeString) {
             this.tag = typeString;
         }
-
-        public String getTag(){
-            return this.tag;
-        }
-
-
     }
 
-    public ResponseType(ResponseTypeEnum type){
-        this.type = type;
-    }
 
     public ResponseType(String typeString) throws Exception {
         setTypeFromString(typeString);
@@ -41,11 +30,18 @@ public class ResponseType {
         }
     }
 
-    public ResponseTypeEnum getType() {
-        return type;
+    public String getTypeAsString(){
+        return type.toString();
     }
 
     public void setType(String type) {
         this.type = ResponseTypeEnum.valueOf(type);
+    }
+
+    @Override
+    public String toString() {
+        return "ResponseType{" +
+                "type=" + type.tag +
+                '}';
     }
 }

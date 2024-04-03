@@ -11,24 +11,14 @@ public class Line {
     private Date date;
     private Integer timeInMinutes;
 
+
     public Line(LineType lineType, Service service, Question question, ResponseType responseType, Date date, String time) {
         this.lineType = lineType;
         this.service = service;
         this.question = question;
         this.responseType = responseType;
         this.date = date;
-
-//        this.timeInMinutes =  Integer.valueOf(time);  //TODO
-       if(time != null) this.timeInMinutes =  Integer.valueOf(time);
-    }
-
-    public Boolean compare(Line query){
-        if(service.getServiceId().equals(query.service.getServiceId())){
-
-            return true;
-        }
-
-        return false;
+        if(time != null) this.timeInMinutes =  Integer.valueOf(time);
     }
 
     public LineType getLineType() {

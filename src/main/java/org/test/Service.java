@@ -1,6 +1,5 @@
 package org.test;
 
-import java.util.Objects;
 
 public class Service {
 
@@ -8,10 +7,6 @@ public class Service {
     private Integer variationId;
     private String asterisk;
 
-    public Service(Integer serviceId, Integer variationId) {
-        this.serviceId = serviceId;
-        this.variationId = variationId;
-    }
 
     public Service(String serviceString) throws Exception {
         setIdsFromString(serviceString);
@@ -19,8 +14,6 @@ public class Service {
 
     public void setIdsFromString(String serviceString) throws Exception {
         String[] segments = serviceString.split("\\.");
-
-//        System.out.println("service segment: " + segments[0]);
 
         if (segments.length > 2 || segments.length == 0) {
             throw new Exception("Invalid service id's number: " + segments.length);
@@ -63,5 +56,14 @@ public class Service {
 
     public void setVariationId(Integer variationId) {
         this.variationId = variationId;
+    }
+
+    @Override
+    public String toString() {
+        return "Service{" +
+                "serviceId=" + serviceId +
+                ", variationId=" + variationId +
+                ", asterisk='" + asterisk + '\'' +
+                '}';
     }
 }

@@ -7,7 +7,7 @@ public class Main {
 
         Parser parser = new Parser();
 
-        List<String> strings = parser.readLinesFromFile("C:\\IdeaProjects\\TestTask\\src\\main\\resources\\input.txt");
+        List<String> strings = parser.readLinesFromFile(".\\src\\main\\resources\\input.txt");
 
         for (String line : strings){
             System.out.println(line);

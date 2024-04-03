@@ -4,7 +4,6 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.Stack;
 import java.util.stream.Collectors;
 
 public class Analyzer {
@@ -14,22 +13,17 @@ public class Analyzer {
 
         List<Integer> results = new ArrayList<>();
 
-//        Stack<Line> lineStack = new Stack<>();
-        List<Line> lineStack = new ArrayList<>();
+        List<Line> linesForAnalyzing = new ArrayList<>();
 
         for (Line line: lines){
-            // dont forget to change to equals
-            if (Objects.equals(line.getLineType().getTypeAsString(), "C")) {  //TODO
-//                lineStack.push(line);
-                lineStack.add(line);
+            if (Objects.equals(line.getLineType().getTypeAsString(), "C")) {
+                linesForAnalyzing.add(line);
             } else if (Objects.equals(line.getLineType().getTypeAsString(), "D")) {
-                results.add(((Double) lineStack.stream().filter(waitingLine -> isValidForAnalyzing(line, waitingLine)).
+                results.add(((Double) linesForAnalyzing.stream().filter(waitingLine -> isValidForAnalyzing(line, waitingLine)).
                         collect(Collectors.summarizingInt(Line::getTimeInMinutes)).getAverage()).intValue());
-//                lineStack.removeAll(lineStack);
             } else {
                 throw new RuntimeException("Nor query nor waiting line");
             }
-
         }
 
         return results;

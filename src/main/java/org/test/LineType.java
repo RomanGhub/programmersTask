@@ -6,7 +6,6 @@ public class LineType {
     private LineTypeEnum type;
 
     private enum LineTypeEnum {
-
         C("WAITING_TIMELINE"),
         D("QUERY");
 
@@ -15,8 +14,8 @@ public class LineType {
         LineTypeEnum(String tag) {
             this.tag = tag;
         }
-
     }
+
 
     public LineType(String typeString) throws Exception {
         setTypeFromString(typeString);
@@ -36,11 +35,15 @@ public class LineType {
         }
     }
 
-    public LineTypeEnum getType(){
-        return type;
-    }
-    public String getTypeAsString(){  //TODO
+    public String getTypeAsString(){
         return type.toString();
+    }
+
+    @Override
+    public String toString() {
+        return "LineType{" +
+                "type=" + type.tag +
+                '}';
     }
 }
 

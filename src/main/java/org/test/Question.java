@@ -8,12 +8,6 @@ public class Question {
     private String asterisk;
 
 
-    public Question(Integer questionTypeId, Integer categoryId, Integer subcategoryId) {
-        this.questionTypeId = questionTypeId;
-        this.categoryId = categoryId;
-        this.subcategoryId = subcategoryId;
-    }
-
     public Question(String questionString) throws Exception {
         setIdsFromString(questionString);
     }
@@ -76,5 +70,15 @@ public class Question {
 
     public void setSubcategoryId(Integer subcategoryId) {
         this.subcategoryId = subcategoryId;
+    }
+
+    @Override
+    public String toString() {
+        return "Question{" +
+                "questionTypeId=" + questionTypeId +
+                ", categoryId=" + categoryId +
+                ", subcategoryId=" + subcategoryId +
+                ", asterisk='" + asterisk + '\'' +
+                '}';
     }
 }
