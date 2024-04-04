@@ -26,21 +26,7 @@ public class Main {
 
         List<String> strings = parser.readLinesFromFile(path);
 
-        /* Print strings that were parsed from
-           input file to ensure correct work of parser */
-        for (String line : strings) {
-            System.out.println(line);
-        }
-
         List<Line> lines = parser.parseLinesFromStingList(strings);
-
-        /* Print Lines that were created from
-           strings to ensure their correctness */
-        for (Line line : lines) {
-            System.out.println(line);
-        }
-
-//        System.out.println(analyzer.analyzeLines(lines).toString());
 
         List<Integer> results = analyzer.analyzeLines(lines);
 

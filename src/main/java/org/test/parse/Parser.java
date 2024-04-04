@@ -20,8 +20,8 @@ public class Parser {
             "\\s+" +
             "([PN])" +                              // Response type (P/N)
             "\\s+" +
-            "(\\d{2}\\.\\d{2}\\.\\d{4}" +           // Date (DD.MM.YYYY) OR
-            "(?:-\\d{2}.\\d{2}.\\d{4})?)" +         // Date (DD.MM.YYYY-DD.MM.YYYY)  //previous
+            "(\\d{2}\\.\\d{2}\\.\\d{4}" +           // Date (DD.MM.YYYY) OR              (depending on input conventions, it could be both d{2} or d{1,2}. Clarification needed.)
+            "(?:-\\d{2}.\\d{2}.\\d{4})?)" +         // Date (DD.MM.YYYY-DD.MM.YYYY)
             "\\s?(\\d+)?"                           // Optional time in minutes
 
     );
@@ -33,6 +33,12 @@ public class Parser {
             lines = Files.readAllLines(Paths.get(fileName));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+
+        if (lines.size() - 1 == Integer.parseInt(lines.get(0))) {
+            lines.remove(0);
+        } else {
+            throw new IllegalArgumentException("Count differs from actual number of lines");
         }
 
         return lines;
