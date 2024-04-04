@@ -1,14 +1,14 @@
-package org.test;
+package org.test.entity;
 
 import java.util.Objects;
 
 public class Line {
 
-    private LineType lineType;
-    private Service service;
-    private Question question;
-    private ResponseType responseType;
-    private Date date;
+    private final LineType lineType;
+    private final Service service;
+    private final Question question;
+    private final ResponseType responseType;
+    private final Date date;
     private Integer timeInMinutes;
 
 
@@ -18,55 +18,27 @@ public class Line {
         this.question = question;
         this.responseType = responseType;
         this.date = date;
-        if(time != null) this.timeInMinutes =  Integer.valueOf(time);
+        if (time != null) this.timeInMinutes = Integer.valueOf(time);
     }
 
     public LineType getLineType() {
         return lineType;
     }
 
-    public void setLineType(LineType lineType) {
-        this.lineType = lineType;
-    }
-
     public Service getService() {
         return service;
-    }
-
-    public void setService(Service service) {
-        this.service = service;
     }
 
     public Question getQuestion() {
         return question;
     }
 
-    public void setQuestion(Question question) {
-        this.question = question;
-    }
-
-    public ResponseType getResponseType() {
-        return responseType;
-    }
-
-    public void setResponseType(ResponseType responseType) {
-        this.responseType = responseType;
-    }
-
     public Date getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
-        this.date = date;
-    }
-
     public Integer getTimeInMinutes() {
         return timeInMinutes;
-    }
-
-    public void setTimeInMinutes(Integer timeInMinutes) {
-        this.timeInMinutes = timeInMinutes;
     }
 
     @Override
@@ -93,7 +65,7 @@ public class Line {
         return Objects.hash(lineType, service, question, responseType, date, timeInMinutes);
     }
 
-    public boolean isValid(Line line){
+    public boolean isValid(Line line) {
         return this.service.isValid(line) && this.question.isValid(line);
     }
 }

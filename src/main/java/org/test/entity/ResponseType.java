@@ -1,10 +1,10 @@
-package org.test;
+package org.test.entity;
 
 public class ResponseType {
 
     private ResponseTypeEnum type;
 
-    private enum ResponseTypeEnum{
+    private enum ResponseTypeEnum {
         P("FIRST"),
         N("NEXT");
 
@@ -16,22 +16,16 @@ public class ResponseType {
     }
 
 
-    public ResponseType(String typeString) throws Exception {
+    public ResponseType(String typeString) {
         setTypeFromString(typeString);
     }
 
-    public void setTypeFromString(String serviceString) throws Exception {
-        String[] typeSegment = serviceString.split("\\.");
-
-        if (typeSegment.length != 1) {
-            throw new Exception("Invalid type");
+    private void setTypeFromString(String lineString) {
+        if (!lineString.equals("P") && !lineString.equals("N")) {
+            throw new IllegalArgumentException("Invalid response type");
         } else {
-            setType(typeSegment[0]);
+            setType(lineString);
         }
-    }
-
-    public String getTypeAsString(){
-        return type.toString();
     }
 
     public void setType(String type) {

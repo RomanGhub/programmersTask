@@ -1,4 +1,4 @@
-package org.test;
+package org.test.entity;
 
 public class Question {
 
@@ -8,22 +8,22 @@ public class Question {
     private String asterisk;
 
 
-    public Question(String questionString) throws Exception {
+    public Question(String questionString) {
         setIdsFromString(questionString);
     }
 
-    public void setIdsFromString(String questionString) throws Exception {
+    private void setIdsFromString(String questionString) {
         String[] segments = questionString.split("\\.");
 
         if (segments.length > 3 || segments.length == 0) {
-            throw new Exception("Invalid question id's number: " + segments.length);
-        } else if(segments.length == 1){
-            if(segments[0].equals("*")){
+            throw new IllegalArgumentException("Invalid question id's number: " + segments.length);
+        } else if (segments.length == 1) {
+            if (segments[0].equals("*")) {
                 asterisk = segments[0];
             } else {
                 setQuestionTypeId(Integer.parseInt(segments[0]));
             }
-        } else if(segments.length == 2){
+        } else if (segments.length == 2) {
             setQuestionTypeId(Integer.parseInt(segments[0]));
             setCategoryId(Integer.parseInt(segments[1]));
         } else {
@@ -33,17 +33,17 @@ public class Question {
         }
     }
 
-    public boolean isValid(Line line){
-        if(questionTypeId != null && categoryId != null && subcategoryId != null){
+    public boolean isValid(Line line) {
+        if (questionTypeId != null && categoryId != null && subcategoryId != null) {
             return questionTypeId.equals(line.getQuestion().getQuestionTypeId())
                     && categoryId.equals(line.getQuestion().getCategoryId())
                     && subcategoryId.equals(line.getQuestion().getSubcategoryId());
-        } else if (questionTypeId != null && categoryId != null){
+        } else if (questionTypeId != null && categoryId != null) {
             return questionTypeId.equals(line.getQuestion().getQuestionTypeId())
                     && categoryId.equals(line.getQuestion().getCategoryId());
-        } else if(questionTypeId != null) {
+        } else if (questionTypeId != null) {
             return questionTypeId.equals(line.getQuestion().getQuestionTypeId());
-        }  else {
+        } else {
             return asterisk.equals("*");
         }
     }

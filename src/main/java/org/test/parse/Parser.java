@@ -1,4 +1,6 @@
-package org.test;
+package org.test.parse;
+
+import org.test.entity.*;
 
 import java.io.IOException;
 import java.nio.file.Files;
@@ -36,7 +38,7 @@ public class Parser {
         return lines;
     }
 
-    public List<Line> parseLinesFromStingList(List<String> strings) throws Exception {
+    public List<Line> parseLinesFromStingList(List<String> strings){
         List<Line> lines = new ArrayList<>();
 
         for (String string : strings) {
@@ -49,8 +51,8 @@ public class Parser {
                 String responseType = matcher.group(4);
                 String date = matcher.group(5);
                 String time = matcher.group(6);
-                //TODO do smth with exceptions
-                Line line = new Line( new LineType(queryOrWaiting), new Service(serviceId), new Question(questionTypeId),
+
+                Line line = new Line(new LineType(queryOrWaiting), new Service(serviceId), new Question(questionTypeId),
                         new ResponseType(responseType), new Date(date), time);
 
                 lines.add(line);

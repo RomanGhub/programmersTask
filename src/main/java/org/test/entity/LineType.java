@@ -1,4 +1,4 @@
-package org.test;
+package org.test.entity;
 
 
 public class LineType {
@@ -17,7 +17,7 @@ public class LineType {
     }
 
 
-    public LineType(String typeString) throws Exception {
+    public LineType(String typeString) {
         setTypeFromString(typeString);
     }
 
@@ -25,19 +25,15 @@ public class LineType {
         type = LineTypeEnum.valueOf(typeString);
     }
 
-    //TODO process exception here, make method private
-    public void setTypeFromString(String lineString) throws Exception {
-        //TODO remove redundant cast to arr and process it
-        String[] typeSegment = lineString.split("\\.");
-
-        if (typeSegment.length != 1) {
-            throw new Exception("Invalid type of line");
+    private void setTypeFromString(String lineString) {
+        if (!lineString.equals("C") && !lineString.equals("D")) {
+            throw new IllegalArgumentException("Invalid type of line");
         } else {
-            setLineType(typeSegment[0]);
+            setLineType(lineString);
         }
     }
 
-    public String getTypeAsString(){
+    public String getTypeAsString() {
         return type.toString();
     }
 

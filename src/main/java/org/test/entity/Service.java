@@ -1,4 +1,4 @@
-package org.test;
+package org.test.entity;
 
 
 public class Service {
@@ -8,17 +8,17 @@ public class Service {
     private String asterisk;
 
 
-    public Service(String serviceString) throws Exception {
+    public Service(String serviceString) {
         setIdsFromString(serviceString);
     }
 
-    public void setIdsFromString(String serviceString) throws Exception {
+    private void setIdsFromString(String serviceString) {
         String[] segments = serviceString.split("\\.");
 
         if (segments.length > 2 || segments.length == 0) {
-            throw new Exception("Invalid service id's number: " + segments.length);
-        } else if(segments.length == 1){
-            if(segments[0].equals("*")){
+            throw new IllegalArgumentException("Invalid service id's number: " + segments.length);
+        } else if (segments.length == 1) {
+            if (segments[0].equals("*")) {
                 asterisk = segments[0];
             } else {
                 setServiceId(Integer.parseInt(segments[0]));
@@ -29,11 +29,10 @@ public class Service {
         }
     }
 
-    //TODO simplify this (not necessary)
-    public boolean isValid(Line line){
-        if (serviceId != null && variationId != null){
+    public boolean isValid(Line line) {
+        if (serviceId != null && variationId != null) {
             return serviceId.equals(line.getService().getServiceId()) && variationId.equals(line.getService().getVariationId());
-        } else if(serviceId != null) {
+        } else if (serviceId != null) {
             return serviceId.equals(line.getService().getServiceId());
         } else {
             return asterisk.equals("*");
@@ -41,7 +40,7 @@ public class Service {
     }
 
     public Integer getServiceId() {
-        if(asterisk != null){
+        if (asterisk != null) {
             return 0;
         }
         return serviceId;
